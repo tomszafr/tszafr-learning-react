@@ -13,7 +13,9 @@ app.set('port', process.env.PORT || 3000)
 app.use(logger('dev'))
 app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded
 
-app.get('/', function(req, res) {
+const appPaths = ['/', '/stuff', '/contact']
+
+app.get(appPaths, function(req, res) {
   res.sendFile(path.join(publicDir, 'index.html'))
 })
 
