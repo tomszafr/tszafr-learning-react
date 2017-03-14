@@ -7,6 +7,11 @@ import {
   NavLink
 } from 'react-router-dom'
 
+import { createStore } from 'redux'
+import todoApp from './reducers'
+
+let store = createStore(todoApp)
+
 var Contact = React.createClass({
   render: function() {
     return (
