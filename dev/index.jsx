@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { hashHistory } from 'react-router';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,7 +9,9 @@ import {
 } from 'react-router-dom'
 
 import { createStore } from 'redux'
+import { Provider } from 'react-redux';
 import todoApp from './reducers'
+import TextSaveHome from './components/TextSaveHome.jsx'
 
 let store = createStore(todoApp)
 
@@ -62,37 +65,15 @@ let App = React.createClass({
   }
 })
 
-let Home = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <h2>HELLO</h2>
-        <p>Cras facilisis urna ornare ex volutpat, et
-        convallis erat elementum. Ut aliquam, ipsum vitae
-        gravida suscipit, metus dui bibendum est, eget rhoncus nibh
-        metus nec massa. Maecenas hendrerit laoreet augue
-        nec molestie. Cum sociis natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus.</p>
-        <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
-      </div>
-    );
-  }
-});
-
-const Child = ({ match }) => (
-  <div>
-    <h3>ID: {match.params.id}</h3>
-  </div>
-)
-
 ReactDOM.render(
-
-  <Router>
-    <App>
-      <Route exact path="/" component={Home} />
-      <Route path="/stuff" component={Stuff} />
-      <Route path="/contact" component={Contact} />
-    </App>
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App>
+        <Route exact path="/" component={TextSaveHome} />
+        <Route path="/stuff" component={Stuff} />
+        <Route path="/contact" component={Contact} />
+      </App>
+    </Router>
+  </Provider>,
   document.querySelector("#container")
 );
